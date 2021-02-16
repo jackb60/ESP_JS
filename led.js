@@ -24,8 +24,8 @@ update_raw = function(){
     }
   }
   a=Math.round(a*sf);
-  b*=Math.round(b*sf);
-  c*=Math.round(c*sf);
+  b=Math.round(b*sf);
+  c=Math.round(c*sf);
   bffr=new Uint8Array([d,a,b,c]).buffer;
   fetch('/LED',{method:'POST',body:bffr});
 }
