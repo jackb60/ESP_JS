@@ -1,8 +1,8 @@
 update_raw = function(){
-  a=document.getElementById('pxl').value;
-  b=document.getElementById('rd').value;
-  c=document.getElementById('gr').value;
-  d=document.getElementById('bl').value;
+  d=document.getElementById('pxl').value;
+  a=document.getElementById('rd').value;
+  b=document.getElementById('gr').value;
+  c=document.getElementById('bl').value;
   if(a>b){
     if(a>c){
       //scale to a
@@ -26,7 +26,7 @@ update_raw = function(){
   a=Math.round(a*sf);
   b*=Math.round(b*sf);
   c*=Math.round(c*sf);
-  bffr=new Uint8Array([a,b,c,d]).buffer;
+  bffr=new Uint8Array([d,a,b,c]).buffer;
   fetch('/LED',{method:'POST',body:bffr});
 }
 
