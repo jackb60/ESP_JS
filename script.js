@@ -169,13 +169,8 @@ if(n_files>0){
   imagea.onload = function(){
     c_clear();
   draw_img(imagea.width,imagea.height,imagea)
-  durl=CanvasToBMP.toDataURL(canvas);
-  img.src = durl;
-  document.body.appendChild(img);
+  fetch('/',{method:'POST',body:CanvasToBMP.toArrayBuffer(canvas)})
   a=document.getElementById('dwn');
-  a.href=durl;
-  a.setAttribute("download", (n_files+0)+".bmp")
-  a.click();
   recursive_onload(n_files-1,fls);
 }
 reader.readAsDataURL(files[n_files-1]);}
