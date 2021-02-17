@@ -1,35 +1,30 @@
 update_raw = function(){
   d=document.getElementById('pxl').value;
-  a=document.getElementById('rd').value;
-  b=document.getElementById('gr').value;
-  c=document.getElementById('bl').value;
-  if(a>b){
-    if(a>c){
-      //scale to a
-      sf=255/a
-    }
-    else{
-      //scale to c
-      sf=255/c
-    }
+  a=parseInt(document.getElementById('rd').value);
+  b=parseInt(document.getElementById('gr').value);
+  c=parseInt(document.getElementById('bl').value);
+  console.log(a,b,c);
+  console.log(a>b);
+  console.log(a>c);
+  if(a>=b && a>=c){
+    console.log('scale to a');
+    sf=255/a
   }
-  else{
-    if(b>c){
-      //scale to b
-      sf=255/b
-    }
-    else{
-      //scale to c
-      sf=255/c
-    }
+  else if(b>=a && b>=c){
+    console.log('scale to b');
+    sf=255/b
+  }
+  else if(c>=a && c>=b){
+    console.log('scale to c');
+    sf=255/c
   }
   a=Math.round(a*sf);
   b=Math.round(b*sf);
   c=Math.round(c*sf);
+  console.log(a,b,c);
   bffr=new Uint8Array([d,a,b,c]).buffer;
   fetch('/LED',{method:'POST',body:bffr});
 }
-
 cls=[[255,0,0],[255,255,0],[0,255,0],[0,255,255],[0,0,255],[255,0,255]];
 aclr=-1;
 divclick=function(element){
