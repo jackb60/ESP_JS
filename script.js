@@ -38,11 +38,14 @@ var CanvasToBMP = {
         pixelArraySize = stride * h,                 // total bitmap size
         fileLength = 54 + pixelArraySize,           // header size is known + bitmap
 
-        file = new ArrayBuffer(fileLength),//+297          // raw byte buffer (returned)
+        file = new ArrayBuffer(fileLength+1),//+297          // raw byte buffer (returned)
         view = new DataView(file),                   // handle endian, reg. width etc.
         pos = 0, x, y = 0, p, s = 0, a, v;
-
+//write ss #
+       view.setUint8(pos, parseInt(document.getElementById('ssn').value);
+       pos+=1;
     // write file header
+   
     setU16(0x4d42);          // BM
     setU32(fileLength);      // total length
     pos += 4;                // skip unused fields
