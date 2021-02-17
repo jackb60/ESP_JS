@@ -42,7 +42,7 @@ var CanvasToBMP = {
         view = new DataView(file),                   // handle endian, reg. width etc.
         pos = 0, x, y = 0, p, s = 0, a, v;
 //write ss #
-       view.setUint8(pos, parseInt(document.getElementById('ssn').value);
+       view.setUint8(pos, parseInt(document.getElementById('ssn').value));
        pos+=1;
     // write file header
    
