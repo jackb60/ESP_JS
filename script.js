@@ -126,9 +126,10 @@ var CanvasToBMP = {
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+sdiv=document.getElementById('status');
 
 var imagea = new Image();
+var req = 0;
 var canvas = document.querySelector("canvas"),
   w = canvas.width,
   h = canvas.height,
@@ -162,7 +163,7 @@ function draw_img(iw,ih,is){
 }
 
 
-recursive_onload=function(n_files,fls){
+recursive_onload=function(n_files,fls,reqq){
 if(n_files>0){
   reader = new FileReader();
   reader.onload = function(e){
@@ -172,7 +173,10 @@ if(n_files>0){
   imagea.onload = function(){
     c_clear();
   draw_img(imagea.width,imagea.height,imagea)
-  fetch('/',{method:'POST',body:CanvasToBMP.toArrayBuffer(canvas)})
+  fetch('/',{method:'POST',body:CanvasToBMP.toArrayBuffer(canvas)}).then(function(){
+      ihtml=document.getElementbyId(reqq).innerHTML
+      ihtml.replace(S.substring(0,ihtml.search("/")),parseInt(S.substring(0,ihtml.search("/"))+1)
+  });
   a=document.getElementById('dwn');
   recursive_onload(n_files-1,fls);
 }
@@ -184,6 +188,8 @@ reader.readAsDataURL(files[n_files-1]);}
 function on_drop(){
 files=document.getElementById('dropfile').files;
 d_len=document.getElementById('dropfile').files.length;
+    req+=1;
+    sdiv.innerHTML+="<div id='"+req+"'>0/"+dlen+"</div>";
 //d_file = document.getElementById('dropfile').files[0];
 
 /*for(b=0;b<d_len;b++){
@@ -204,7 +210,7 @@ document.body.appendChild(img);
 a=document.getElementById('dwn');
 a.href=durl;
 a.click();*/
-recursive_onload(d_len,files);
+recursive_onload(d_len,files,req);
 
 };
 
